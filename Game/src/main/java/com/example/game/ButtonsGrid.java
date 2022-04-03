@@ -70,23 +70,25 @@ public class ButtonsGrid implements Grid {
 
         int prevNode = pickedNodes.get(pickedNodes.size() - 1);
         int currentNode = i * 10 + j;
+        System.out.println(isAdject(prevNode, currentNode) + "||" + wasPicked(i * 10 + j) + " || " + (sticks.edgesOf(i * 10 + j).size() > 0));
         if (isAdject(prevNode, currentNode) && wasPicked(i * 10 + j) && sticks.edgesOf(i * 10 + j).size() > 0) {
             pickedNodes.add(currentNode);
             return true;
         }
-        System.out.println(isAdject(prevNode, currentNode) + "||" + wasPicked(i * 10 + j) + " || " + (sticks.edgesOf(i * 10 + j).size() > 0));
         return false;
     }
 
     public boolean isAdject(int prevNode, int currentNode) {
         if (prevNode != -1){
-            System.out.println("PREV: " + prevNode + " " + currentNode);
+            System.out.println("PREV: " + prevNode + "; CURRENT: " + currentNode);
+            System.out.println(sticks.edgesOf(prevNode));
             for (DefaultEdge i : sticks.edgesOf(prevNode)) {
                 int adject1 = sticks.getEdgeSource(i);
                 int adject2 = sticks.getEdgeTarget(i);
-                if (adject1 == prevNode || adject2 == prevNode) return true;
-            System.out.println("ADJECT1: " + sticks.getEdgeSource(i));
-            System.out.println("ADJECT2: " + sticks.getEdgeTarget(i));
+                System.out.println("$$$$$$");
+                System.out.println("ADJECT1: " + sticks.getEdgeSource(i));
+                System.out.println("ADJECT2: " + sticks.getEdgeTarget(i));
+                if (adject1 == currentNode || adject2 == currentNode) return true;
             }
             return false;
         }
