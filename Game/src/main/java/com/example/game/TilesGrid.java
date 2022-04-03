@@ -57,7 +57,7 @@ public class TilesGrid implements Grid {
                     stick1 = new Rectangle(36, 0, Color.BLACK);
                 } else {
                     stick1 = new Rectangle(36, 4, Color.BLACK);
-                    System.out.println(j + " | " + i + " (" + (int) (j * 10 + i) + "->" + (int) (j * 10 + i + 1) + ")");
+//                    System.out.println(j + " | " + i + " (" + (int) (j * 10 + i) + "->" + (int) (j * 10 + i + 1) + ")");
                     sticks.addEdge(j * 10 + i, j * 10 + i + 1);
                 }
                 if (randomSticks[j][i] == 0) {
@@ -65,7 +65,7 @@ public class TilesGrid implements Grid {
                 } else {
                     stick2 = new Rectangle(4, 36, Color.BLACK);
                     sticks.addEdge(i * 10 + j, i * 10 + j + 10);
-                    System.out.println(i + " // " + j + " (" + (int) (i * 10 + j) + "->" + (int) (i * 10 + j + 10) + ")");
+//                    System.out.println(i + " // " + j + " (" + (int) (i * 10 + j) + "->" + (int) (i * 10 + j + 10) + ")");
                 }
                 stick1.setStroke(Color.BLACK);
                 stick2.setStroke(Color.BLACK);
@@ -78,7 +78,6 @@ public class TilesGrid implements Grid {
                 GridPane.setValignment(stick2, VPos.TOP);
             }
         }
-        getGraph();
         return this.sticks;
     }
 

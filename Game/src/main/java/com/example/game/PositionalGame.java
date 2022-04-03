@@ -38,9 +38,7 @@ public class PositionalGame extends Application {
         mainBoard.setAlignment(Pos.CENTER);
         mainBoard.getChildren().addAll(grid.getGridPane(), tilesGrid.getGridPane(), buttonsGrid.getGridPane());
 
-//        bottomBar.takePicture(mainBoard);
         root.setCenter(mainBoard);
-//        root.setCenter(grid.getGridPane());
 
         return root;
     }

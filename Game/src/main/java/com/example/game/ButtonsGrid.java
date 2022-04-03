@@ -57,6 +57,9 @@ public class ButtonsGrid implements Grid {
                     node.setFill(Color.INDIANRED);
                     ++turn;
                 }
+                if(endOfGame()) {
+                    System.out.println("Player " + (int)((turn-1) % 2 + 1) + " wins");
+                }
             } else {
                 System.out.println("Invalid move!");
             }
@@ -66,11 +69,11 @@ public class ButtonsGrid implements Grid {
     public boolean validMove(Circle node) {
         int i = GridPane.getRowIndex(node);
         int j = GridPane.getColumnIndex(node);
-        System.out.println(sticks.edgesOf(i * 10 + j));
+//        System.out.println(sticks.edgesOf(i * 10 + j));
 
         int prevNode = pickedNodes.get(pickedNodes.size() - 1);
         int currentNode = i * 10 + j;
-        System.out.println(isAdject(prevNode, currentNode) + "||" + wasPicked(i * 10 + j) + " || " + (sticks.edgesOf(i * 10 + j).size() > 0));
+//        System.out.println(isAdject(prevNode, currentNode) + "||" + wasPicked(i * 10 + j) + " || " + (sticks.edgesOf(i * 10 + j).size() > 0));
         if (isAdject(prevNode, currentNode) && wasPicked(i * 10 + j) && sticks.edgesOf(i * 10 + j).size() > 0) {
             pickedNodes.add(currentNode);
             return true;
@@ -80,14 +83,10 @@ public class ButtonsGrid implements Grid {
 
     public boolean isAdject(int prevNode, int currentNode) {
         if (prevNode != -1){
-            System.out.println("PREV: " + prevNode + "; CURRENT: " + currentNode);
-            System.out.println(sticks.edgesOf(prevNode));
+//            System.out.println(sticks.edgesOf(prevNode));
             for (DefaultEdge i : sticks.edgesOf(prevNode)) {
                 int adject1 = sticks.getEdgeSource(i);
                 int adject2 = sticks.getEdgeTarget(i);
-                System.out.println("$$$$$$");
-                System.out.println("ADJECT1: " + sticks.getEdgeSource(i));
-                System.out.println("ADJECT2: " + sticks.getEdgeTarget(i));
                 if (adject1 == currentNode || adject2 == currentNode) return true;
             }
             return false;
@@ -100,6 +99,14 @@ public class ButtonsGrid implements Grid {
             if (node == i) {
                 return false;
             }
+        }
+        return true;
+    }
+
+    public boolean endOfGame() {
+        int prevNode = pickedNodes.get(pickedNodes.size() - 1);
+        if(prevNode != -1 && sticks.edgesOf(prevNode).size() > 1) {
+            return false;
         }
         return true;
     }
