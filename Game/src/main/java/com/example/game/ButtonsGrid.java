@@ -71,19 +71,22 @@ public class ButtonsGrid implements Grid {
         int prevNode = pickedNodes.get(pickedNodes.size() - 1);
         int currentNode = i * 10 + j;
         if (isAdject(prevNode, currentNode) && wasPicked(i * 10 + j) && sticks.edgesOf(i * 10 + j).size() > 0) {
+            pickedNodes.add(currentNode);
             return true;
         }
+        System.out.println(isAdject(prevNode, currentNode) + "||" + wasPicked(i * 10 + j) + " || " + (sticks.edgesOf(i * 10 + j).size() > 0));
         return false;
     }
 
     public boolean isAdject(int prevNode, int currentNode) {
         if (prevNode != -1){
-            for (DefaultEdge i : sticks.edgesOf(currentNode)) {
+            System.out.println("PREV: " + prevNode + " " + currentNode);
+            for (DefaultEdge i : sticks.edgesOf(prevNode)) {
                 int adject1 = sticks.getEdgeSource(i);
                 int adject2 = sticks.getEdgeTarget(i);
                 if (adject1 == prevNode || adject2 == prevNode) return true;
-//            System.out.println("HERE: " + sticks.getEdgeSource(i));
-//            System.out.println("HERE: " + sticks.getEdgeTarget(i));
+            System.out.println("ADJECT1: " + sticks.getEdgeSource(i));
+            System.out.println("ADJECT2: " + sticks.getEdgeTarget(i));
             }
             return false;
         }
@@ -96,7 +99,6 @@ public class ButtonsGrid implements Grid {
                 return false;
             }
         }
-        pickedNodes.add(node);
         return true;
     }
 
